@@ -4,7 +4,58 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <Target Name="CopyXMLFromPackages" AfterTargets="Build">
+    <Copy SourceFiles="$(PkgDisqord)\lib\net6.0\Disqord.xml" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="$(PkgDisqord_Core)\lib\net6.0\Disqord.Core.xml" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="$(PkgDisqord_Gateway)\lib\net6.0\Disqord.Gateway.xml" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="$(PkgDisqord_Gateway_Api)\lib\net6.0\Disqord.Gateway.Api.xml" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="$(PkgDisqord_Rest)\lib\net6.0\Disqord.Rest.xml" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="$(PkgDisqord_Rest_Api)\lib\net6.0\Disqord.Rest.Api.xml" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="$(PkgDisqord_Webhook)\lib\net6.0\Disqord.Webhook.xml" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="$(PkgDisqord_Bot)\lib\net6.0\Disqord.Bot.xml" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="$(PkgDisqord_OAuth2)\lib\net6.0\Disqord.OAuth2.xml" DestinationFolder="$(OutDir)" />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="Disqord" Version="1.0.0-183" GeneratePathProperty="true" />
+    <PackageReference Include="Disqord.Core" Version="1.0.0-183" GeneratePathProperty="true" />
+    <PackageReference Include="Disqord.Gateway" Version="1.0.0-183" GeneratePathProperty="true" />
+    <PackageReference Include="Disqord.Gateway.Api" Version="1.0.0-183" GeneratePathProperty="true" />
+    <PackageReference Include="Disqord.Rest" Version="1.0.0-183" GeneratePathProperty="true" />
+    <PackageReference Include="Disqord.Rest.Api" Version="1.0.0-183" GeneratePathProperty="true" />
+    <PackageReference Include="Disqord.Webhook" Version="1.0.0-183" GeneratePathProperty="true" />
+    <PackageReference Include="Disqord.Bot" Version="1.0.0-183" GeneratePathProperty="true" />
+    <PackageReference Include="Disqord.OAuth2" Version="1.0.0-183" GeneratePathProperty="true" />
+    <PackageReference Include="LoxSmoke.DocXml" Version="3.4.5" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="6.0.0" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="4.2.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\Modules" />
+  </ItemGroup>
 
 </Project>
